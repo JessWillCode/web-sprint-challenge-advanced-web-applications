@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import Article from './Article';
 import EditForm from './EditForm';
-
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 
@@ -11,6 +10,7 @@ const View = (props) => {
     const [articles, setArticles] = useState([]);
     const [editing, setEditing] = useState(false);
     const [editId, setEditId] = useState();
+    const { setArticle } = props;
 
     useEffect(() => {
         axiosWithAuth()
@@ -19,7 +19,7 @@ const View = (props) => {
             setArticles(res.data);
         })
         .catch(err => {
-            console.log(err);
+            setArticle(err.response.data);
         })
     }, [])
 
@@ -38,7 +38,7 @@ const View = (props) => {
             setArticles(res.data);
         })
         .catch(err => {
-            console.log(err);
+            setArticle(err.response.data);
         })
     }
 

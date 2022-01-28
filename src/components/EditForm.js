@@ -8,7 +8,8 @@ const initialArticle = {
     headline: "",
     author: "",
     summary: "",
-    body: ""
+    body: "",
+    error: ''
 };
 
 const EditForm = (props)=> {
@@ -22,7 +23,7 @@ const EditForm = (props)=> {
             setArticle(res.data);
         })
         .catch(err => {
-            console.log(err);
+            setArticle(err.response.data);
         })
     }, [])
 

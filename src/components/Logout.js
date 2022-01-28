@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const Logout = () => { 
-    const { push } = useHistory();     
+const Logout = (props) => { 
+    const { push } = useHistory();   
+    const { setState } = props;  
     
     useEffect(() => {
         axiosWithAuth()
@@ -14,7 +14,7 @@ const Logout = () => {
             push('/login');
         })
         .catch(err => {
-            console.log(err.response.data);
+            setState(err.response.data);
         })
     })
     return(<div></div>);

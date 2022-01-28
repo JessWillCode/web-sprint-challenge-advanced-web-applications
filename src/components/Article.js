@@ -12,6 +12,7 @@ const Article = (props)=> {
                 <img src={`https://picsum.photos/id/${article.image}/300/300`}/>
             </Container>
             <Container>
+                <p>{article.error}</p>
                 <h1 data-testid="headline">{article.headline}</h1>
                 <p data-testid="author">By {article.author || "Associated Press"}</p>
                 <h3 data-testid="summary">{article.summary}</h3>
