@@ -6,8 +6,8 @@ import axios from 'axios';
 
 const Login = () => {
     const [state, setState] = useState({
-        username: 'Lambda',
-        password: 'School',
+        username: '',
+        password: '',
         error: ''
     });
     const { push } = useHistory();
@@ -29,11 +29,7 @@ const Login = () => {
             push('/view');
         })
         .catch(err => {
-            setState({
-                ...state,
-                error: err.response.data
-            })
-            
+            setState(err.response.data);
         })
     }
     
@@ -60,8 +56,8 @@ const Login = () => {
                 onChange={handleChange}
                 />
                 <Button id='submit' onClick={handleLogin}>Log in</Button>
+                <p id='error'>{state.error}</p>
             </FormGroup>
-            <p id='error'>{state.error}</p>
         </ModalContainer>
     </ComponentContainer>);
 }
