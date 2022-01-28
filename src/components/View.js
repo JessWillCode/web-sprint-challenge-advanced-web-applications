@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import Article from './Article';
 import EditForm from './EditForm';
 
-import axioswithAuth from '../utils/axiosWithAuth';
+import axiosWithAuth from '../utils/axiosWithAuth';
+
 
 const View = (props) => {
     const [articles, setArticles] = useState([]);
@@ -12,8 +13,8 @@ const View = (props) => {
     const [editId, setEditId] = useState();
 
     useEffect(() => {
-        axioswithAuth()
-        .get(`http://localhost:5000/api/articles`)
+        axiosWithAuth()
+        .get('/articles')
         .then(res => {
             setArticles(res.data);
         })
@@ -23,7 +24,7 @@ const View = (props) => {
     }, [])
 
     const handleDelete = (id) => {
-        axioswithAuth()
+        axiosWithAuth()
         .delete(`/articles/${id}`)
         .then(res => {
             setArticles(res.data);
@@ -31,6 +32,14 @@ const View = (props) => {
     }
 
     const handleEdit = (article) => {
+        axiosWithAuth()
+        .put(`/articles/${editId}`, article)
+        .then(res => {
+            setArticles(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     const handleEditSelect = (id)=> {
@@ -63,9 +72,6 @@ const View = (props) => {
 }
 
 export default View;
-
-
-//4. Complete handleEdit method. It should make a request that updates the article that matches the included article param.
 
 
 const Container = styled.div`
